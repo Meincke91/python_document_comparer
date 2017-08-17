@@ -1,9 +1,9 @@
 class FileFilter():
 	def filterExtensions(self, file_path, extensions, output_excluded, output_including):
-		open(output_excluded,"w")
-		open(output_including,"w")
+		open(output_excluded,"w",encoding='iso-8859-1', errors='ignore')
+		open(output_including,"w",encoding='iso-8859-1', errors='ignore')
 
-		with open(file_path, 'r',encoding='utf-8', errors='ignore') as f:
+		with open(file_path, 'r',encoding='iso-8859-1', errors='ignore') as f:
 			for line in f:
 				line_contains_illegal = False
 				for extension in extensions:
@@ -18,10 +18,10 @@ class FileFilter():
 						f.write(line)
 
 	def filterLeadingName(self, file_path, leading_signs):
-		open('docs/illegal_leading_lines.txt',"w")
-		open('docs/excluded_illegal_leading_characters.txt',"w")
+		open('docs/illegal_leading_lines.txt',"w",encoding='iso-8859-1', errors='ignore')
+		open('docs/excluded_illegal_leading_characters.txt',"w",encoding='iso-8859-1', errors='ignore')
 
-		with open(file_path, 'r',encoding='utf-8', errors='ignore') as f:
+		with open(file_path, 'r',encoding='iso-8859-1', errors='ignore') as f:
 			for line in f:
 				line_contains_illegal = False
 				for leading_sign in leading_signs:
@@ -35,11 +35,11 @@ class FileFilter():
 					with open('docs/excluded_illegal_leading_characters.txt',"a") as output_f:
 						output_f.write(line)
 
-	def filterIllegalCharacter(self, file_path, characters, outputfile='docs/excluded_illegal_characters.txt'):
-			open(outputfile,"w")
-			open('docs/illegal_character_lines.txt',"w")
+	def filterIllegalCharacter(self, file_path, characters, output_excluded, output_including):
+			open(output_excluded,"w",encoding='iso-8859-1', errors='ignore')
+			open(output_including,"w",encoding='iso-8859-1', errors='ignore')
 
-			with open(file_path, 'r',encoding='utf-8', errors='ignore') as f:
+			with open(file_path, 'r',encoding='iso-8859-1', errors='ignore') as f:
 				for line in f:
 					line_contains_illegal = False
 					for character in characters:
@@ -47,10 +47,10 @@ class FileFilter():
 							line_contains_illegal = True
 
 					if line_contains_illegal:
-						with open('docs/illegal_character_lines.txt',"a") as output_f:
+						with open(output_including,"a",encoding='iso-8859-1', errors='ignore') as output_f:
 							output_f.write(line)
 					else:
-						with open(outputfile,"a") as output_f:
+						with open(output_excluded,"a",encoding='iso-8859-1', errors='ignore') as output_f:
 							output_f.write(line)
 
 if __name__ == '__main__':
